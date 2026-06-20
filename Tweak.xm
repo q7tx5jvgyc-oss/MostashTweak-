@@ -1,8 +1,8 @@
 #import <UIKit/UIKit.h>
 
-static UIView *button;
+static UIView *floatingButton;
 static UIView *panel;
-static BOOL panelShown = NO;
+static BOOL panelVisible = NO;
 
 static UIWindow *getWindow() {
     for (UIScene *scene in UIApplication.sharedApplication.connectedScenes) {
@@ -18,8 +18,8 @@ static UIWindow *getWindow() {
 }
 
 static void togglePanel() {
-    panelShown = !panelShown;
-    panel.hidden = !panelShown;
+    panelVisible = !panelVisible;
+    panel.hidden = !panelVisible;
 }
 
 static void createUI() {
@@ -27,33 +27,33 @@ static void createUI() {
     UIWindow *window = getWindow();
     if (!window) return;
 
-    // زر عائم
-    button = [[UIView alloc] initWithFrame:CGRectMake(120, 200, 60, 60)];
-    button.backgroundColor = UIColor.systemBlueColor;
-    button.layer.cornerRadius = 30;
+    // 🔵 زر عائم
+    floatingButton = [[UIView alloc] initWithFrame:CGRectMake(120, 200, 60, 60)];
+    floatingButton.backgroundColor = UIColor.systemBlueColor;
+    floatingButton.layer.cornerRadius = 30;
 
-    UILabel *label = [[UILabel alloc] initWithFrame:button.bounds];
-    label.text = @"M";
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = UIColor.whiteColor;
+    UILabel *l = [[UILabel alloc] initWithFrame:floatingButton.bounds];
+    l.text = @"M";
+    l.textAlignment = NSTextAlignmentCenter;
+    l.textColor = UIColor.whiteColor;
 
-    [button addSubview:label];
+    [floatingButton addSubview:l];
 
     UITapGestureRecognizer *tap =
         [[UITapGestureRecognizer alloc] initWithTarget:nil action:@selector(togglePanel)];
 
-    [button addGestureRecognizer:tap];
+    [floatingButton addGestureRecognizer:tap];
 
-    [window addSubview:button];
+    [window addSubview:floatingButton];
 
-    // لوحة تحكم
-    panel = [[UIView alloc] initWithFrame:CGRectMake(50, 250, 250, 200)];
+    // 🟢 لوحة التحكم
+    panel = [[UIView alloc] initWithFrame:CGRectMake(60, 280, 240, 180)];
     panel.backgroundColor = UIColor.blackColor;
     panel.layer.cornerRadius = 12;
     panel.hidden = YES;
 
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 200, 30)];
-    title.text = @"MOSTASH PANEL";
+    title.text = @"MOSTASH MENU";
     title.textColor = UIColor.whiteColor;
 
     [panel addSubview:title];
