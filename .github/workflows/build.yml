@@ -8,8 +8,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install deps
         run: brew install dpkg
@@ -26,5 +25,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: tweak
+          name: MostashTweak
           path: packages/*.deb
